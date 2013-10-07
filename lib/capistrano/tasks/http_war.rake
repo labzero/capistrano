@@ -12,7 +12,7 @@ namespace :http_war do
       end
       within repo_path do
         execute :mkdir, '-p', release_path
-        execute "wget -nv #{fetch[:artifact_url]} -O - | jar -xf -C #{release_path}"
+        execute "wget -nv #{fetch(:artifact_url)} -O - | jar -xf -C #{release_path}"
       end
     end
   end
