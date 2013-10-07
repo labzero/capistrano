@@ -22,7 +22,7 @@ namespace :http_war do
 
       within repo_path do
         execute :mkdir, '-p', release_path
-        execute :unzip, artifact_file_path, '-d', release_path
+        execute :unzip, '-q', artifact_file_path, '-d', release_path
       end
     end
   end
