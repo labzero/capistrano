@@ -10,9 +10,17 @@ namespace :http_war do
       within deploy_path do
         execute :mkdir, '-p', repo_path
       end
+
+      artifact_name = File.basename fetch(:artifact_url)
+
+      within fetch(:tmp_path) do
+        execute :rm, '-rf', artifact_name
+        execute "wget -nv #{fetch(:artifact_url)}"
+      end
+
       within repo_path do
         execute :mkdir, '-p', release_path
-        execute "wget -nv #{fetch(:artifact_url)} -O - | jar -xf -C #{release_path}"
+        execute "jar -xf #{fetch(:tmp_path)}/#{artifact_name} -C #{release_path}"
       end
     end
   end
