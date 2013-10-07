@@ -18,9 +18,11 @@ namespace :http_war do
         execute :wget, '-nv', fetch(:artifact_url)
       end
 
+      artifact_file_path = "#{fetch(:tmp_path)}/#{artifact_name}"
+
       within repo_path do
         execute :mkdir, '-p', release_path
-        execute "jar -xf #{fetch(:tmp_path)}/#{artifact_name} -C #{release_path}"
+        execute :unzip, artifact_file_path, '-d', release_path
       end
     end
   end
