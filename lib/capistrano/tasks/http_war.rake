@@ -15,7 +15,7 @@ namespace :http_war do
 
       within fetch(:tmp_path) do
         execute :rm, '-rf', artifact_name
-        execute "wget -nv #{fetch(:artifact_url)}"
+        execute :wget, '-nv', fetch(:artifact_url)
       end
 
       within repo_path do
